@@ -4,7 +4,10 @@
  */
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+
+const user = require("./views/user.js");
 
 // This loads the .env file into process.env object.
 
@@ -24,6 +27,11 @@ const PORT = process.env.PORT || 5000;
  * The express() function is a top-level function exported by the express module.
  */
 const app = express();
+
+// Middleware that parses json data
+app.use(bodyParser.json());
+
+app.use("/user", user);
 
 /**
  * The mongooses' connect method requires the URI to be passed

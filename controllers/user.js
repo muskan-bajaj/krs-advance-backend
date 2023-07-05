@@ -4,6 +4,27 @@ const jwt = require("jsonwebtoken");
 // Imports User Model
 const User = require("../models/User.js");
 
+// Method to handle getAllUsers requests.
+const getAllUsers = async (req, res) => {
+  try{
+    // Returns every users.
+    const users = await User.find({});
+    const mappedUsers = users.map((element)=> {
+      // Return an object containing name, image
+      // and email
+      return {
+        name: element.name,
+        image: element.image,
+        email: element.email
+      }
+    })
+    return mappedUsers;
+  }
+  catch(err) {
+    console.log(err);
+  }
+}
+
 // Method to handle register requests.
 const register = async (req, res) => {
   try {
@@ -68,6 +89,7 @@ const login = async (req, res) => {
 };
 
 module.exports = {
+  getAllUsers,
   register,
   login,
 };

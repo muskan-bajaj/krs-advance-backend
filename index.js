@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
-const user = require("./views/user.js");
+const user = require("./routes/user.js");
 
 // This loads the .env file into process.env object.
 

@@ -10,6 +10,15 @@ const user = require("../controllers/user.js");
 const router = express.Router();
 
 /**
+ * This route handles get request on 'getAllUsers'.
+ * It responds with an array of object having
+ *   name - String
+ *   email - String
+ *   image - String
+ */
+router.get("/getAllUsers", user.getAllUsers);
+
+/**
  * This route handles post request on 'register'.
  * This routes requires these :-
  *   name - String (required)

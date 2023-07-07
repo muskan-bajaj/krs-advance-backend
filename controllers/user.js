@@ -4,26 +4,28 @@ const jwt = require("jsonwebtoken");
 // Imports User Model
 const User = require("../models/User.js");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 // Method to handle getAllUsers requests.
 const getAllUsers = async (req, res) => {
-  try{
+  try {
     // Returns every users.
     const users = await User.find({});
-    const mappedUsers = users.map((element)=> {
+    const mappedUsers = users.map((element) => {
       // Return an object containing name, image
       // and email
       return {
         name: element.name,
         image: element.image,
-        email: element.email
-      }
-    })
-    return mappedUsers;
-  }
-  catch(err) {
+        email: element.email,
+      };
+    });
+    res.json(mappedUsers);
+  } catch (err) {
     console.log(err);
   }
-}
+};
 
 // Method to handle register requests.
 const register = async (req, res) => {
@@ -46,6 +48,9 @@ const register = async (req, res) => {
     });
     // Updates the database
     await user.save();
+
+    console.log("user added");
+
     // Send an JSON with the id of the newly created user object.
     res.json({
       id: user._id,
